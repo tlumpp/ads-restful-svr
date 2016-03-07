@@ -1,4 +1,4 @@
-# ADS-RESTful - A Node.js® server providing a REST interface to your Beckhoff
+# ADS-RESTful - A Node.js® server providing a REST interface to your Beckhoff PLC
  TwinCAT (©) PLC (Note: document under construction)
 
 ## Overview
