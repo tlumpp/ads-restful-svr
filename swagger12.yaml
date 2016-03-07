@@ -1,0 +1,122 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+# This is your document metadata
+info:
+  title: ADS-RESTful - A Node.js® server providing a REST interface to your Beckhoff TwinCAT (©) PLC
+  description: |
+    Give your apps access to a Beckhoff PLC via a REST API. ADS-RESTful is a server application based on Node.js. 
+    You simply have to connect ADS-RESTful to a Beckhoff TwinCat PLC. Applications can access the PLC variables via the REST-API provided by the ADS-RESTful server. The REST interface is targeted for applications like smart home apps (not non-real-time apps). TwinCAT and ADS are products by © Beckhoff Automation GmbH & Co. KG, Germany. I am not affiliated.
+  version: "0.8.2"
+
+# array of all schemes that your api supports
+#schemes:
+#  - https
+# Describe your paths here
+paths:
+  #
+  /adsCommConfig:
+    # x-swagger-router-controller defines the controller file name in ./controllers
+    # note: swagger doc refers to the wrong folder
+    # note: After code generation an additional x-swagger-router-controller route to the Default.js file is generated.
+    #       This additional x-swagger-router-controller entry has to be removed to enable invocation of operationId
+    #       (./api/swagger.yaml)
+    x-swagger-router-controller: adsctrl
+    # This is a HTTP operation
+    get:
+      # This is the function called by swagger in controller file
+      operationId: swagAdsCommConfig
+      summary:
+        Read ADS communication parameters from a configuration file (server side only)
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Mandatory parameters in the configration file ./adsoptions.cfg are host, amsNetIdTarget, amsNetIdSource.
+        
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+        400:
+          description: Bad request - Could not establish communication with Beckhoff PLC
+        404:
+          description: Not found - Could not find configuration file
+  /spsVarBool/{spsVarName}:
+    # x-swagger-router-controller defines the controller file name in ./controllers
+    # note: swagger doc refers to the wrong folder
+    # note: After code generation an additional x-swagger-router-controller route to the Default.js file is generated.
+    #       This additional x-swagger-router-controller entry has to be removed to enable invocation of operationId
+    #       (./api/swagger.yaml)
+    x-swagger-router-controller: adsctrl
+    # This is a HTTP operation
+    get:
+      # This is the function called by swagger in controller file
+      operationId: swagGetSpsVarValue
+      summary:
+        Read value of PLC variable {spsVarName} of type BOOL
+      # Describe this verb here. Note: you can use markdown
+      description: |
+      parameters:
+        - name: spsVarName
+          in: path
+          description: Variable name
+          required: true
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+              # type: integer
+              $ref: '#/definitions/boolVal'
+        400:
+          description: Bad request - Could not read variable
+    put:
+      # This is the function called by swagger in controller file
+      operationId: swagPutSpsVarValue
+      summary: Write value of variable {spsVarName} of type BOOL
+      # Describe this verb here. Note: you can use markdown
+      description: |
+      # Expected responses for this operation:
+      parameters:
+        - name: spsVarName
+          in: path
+          description: Variable name
+          required: true
+          type: string
+        - name: spsVarValue
+          in: body
+          description: Value (true or false)
+          required: true
+          schema:
+            $ref: '#/definitions/boolVal'
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+        400:
+          description: Could not write variable
+definitions:
+  boolVal:
+    type: object
+    required:
+      - varValue
+    properties:
+      varValue:
+        type: boolean
+#  intVal:
+#    type: object
+#    required:
+#      - varValue
+#    properties:
+#      varValue:
+#        type: integer

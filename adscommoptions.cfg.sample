@@ -1,0 +1,25 @@
+#==============================================================================
+# Configuration file ADS-RESTful Server
+#==============================================================================
+# mandatory parameters are host, amsNetIdTarget, amsNetIdSource
+# more optional parameters can be specified for details refer to the
+# documentation in the node modul 'ads'.
+
+#==============================================================================
+# Target PLC
+#==============================================================================
+# host: IP address of the Beckhoff PLC (target)
+# e.g. 192.168.1.10
+host = x.x.x.x
+# amsNetIdTarget: amsNetID of the target PLC
+# e.g. 5.32.40.12.1.1
+amsNetIdTarget = x.x.x.x.x.x
+
+#==============================================================================
+# Source: Running the ads-restful-svr
+# Note: the amsNetID needs to be entered as a route on the PLC !
+#==============================================================================
+# amsNetIdSource: amsNetId is a route defined on the PLC to find the IP address
+# where the ads-restful-svr is running
+# e.g. 5.5.1.14.1.1
+amsNetIdSource = x.x.x.x.x.x

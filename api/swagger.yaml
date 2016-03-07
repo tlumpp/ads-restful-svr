@@ -1,0 +1,81 @@
+---
+swagger: "2.0"
+info:
+  description: "Give your apps access to a Beckhoff PLC via a REST API. ADS-RESTful\
+    \ is a server application based on Node.js. \nYou simply have to connect ADS-RESTful\
+    \ to a Beckhoff TwinCat PLC. Applications can access the PLC variables via the\
+    \ REST-API provided by the ADS-RESTful server. The REST interface is targeted\
+    \ for applications like smart home apps (not non-real-time apps). TwinCAT and\
+    \ ADS are products by © Beckhoff Automation GmbH & Co. KG, Germany. I am not affiliated.\n"
+  version: "0.8.2"
+  title: "ADS-RESTful - A Node.js® server providing a REST interface to your Beckhoff\
+    \ TwinCAT (©) PLC"
+paths:
+  /adsCommConfig:
+    get:
+      summary: "Read ADS communication parameters from a configuration file (server\
+        \ side only)"
+      description: "Mandatory parameters in the configration file ./adsoptions.cfg\
+        \ are host, amsNetIdTarget, amsNetIdSource.\n"
+      operationId: "swagAdsCommConfig"
+      parameters: []
+      responses:
+        200:
+          description: "Successful response"
+        400:
+          description: "Bad request - Could not establish communication with Beckhoff\
+            \ PLC"
+        404:
+          description: "Not found - Could not find configuration file"
+      # x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "adsctrl"
+  /spsVarBool/{spsVarName}:
+    get:
+      summary: "Read value of PLC variable {spsVarName} of type BOOL"
+      description: ""
+      operationId: "swagGetSpsVarValue"
+      parameters:
+      - name: "spsVarName"
+        in: "path"
+        description: "Variable name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/boolVal"
+        400:
+          description: "Bad request - Could not read variable"
+      # x-swagger-router-controller: "Default"
+    put:
+      summary: "Write value of variable {spsVarName} of type BOOL"
+      description: ""
+      operationId: "swagPutSpsVarValue"
+      parameters:
+      - name: "spsVarName"
+        in: "path"
+        description: "Variable name"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "spsVarValue"
+        description: "Value (true or false)"
+        required: true
+        schema:
+          $ref: "#/definitions/boolVal"
+      responses:
+        200:
+          description: "Successful response"
+        400:
+          description: "Could not write variable"
+      # x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "adsctrl"
+definitions:
+  boolVal:
+    type: "object"
+    required:
+    - "varValue"
+    properties:
+      varValue:
+        type: "boolean"

@@ -1,0 +1,16 @@
+{
+  "name": "ads-res-tful---a-node/js®-server-providing-a-rest-interface-to-your-beckhoff-twin-cat-(©)-plc",
+  "version": "0.8.2",
+  "description": "Give your apps access to a Beckhoff PLC via a REST API. ADS-RESTful is a server application based on Node.js. \nYou simply have to connect ADS-RESTful to a Beckhoff TwinCat PLC. Applications can access the PLC variables via the REST-API provided by the ADS-RESTful server. The REST interface is targeted for applications like smart home apps (not non-real-time apps). TwinCAT and ADS are products by © Beckhoff Automation GmbH & Co. KG, Germany. I am not affiliated.",
+  "main": "index.js",
+  "keywords": [
+    "swagger"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "swagger-tools": "0.9.*"
+  }
+}

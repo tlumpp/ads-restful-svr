@@ -1,0 +1,20 @@
+Things to be done
+=================
+
+- allow to modify port
+- return code handling in controller files
+- tolerate no connection to PLC (currently server dies)
+- refine readme.md
+- adjust comments in swagger file
+- adjust package.json
+- rename index.js
+- add sample client code
+- add comment that node.js could run on pLC itself but not tested
+- {"schemaValidationMessages":[{"level":"error","message":"Can't read from file http://192.168.2.108:8080/api-docs"}]}
+
+- core files:
+- swagger source (generating server)
+- controllers/adscontroller.js
+- controllers/adsctrl.js
+- config files
+- adjust route in automatic generated file api/swagger.yaml
