@@ -59,7 +59,7 @@ var ads = require('ads'),
 function readAdsCommOptions() {
   // var funcoptions;
   logger.debug("--- readAdsCommOptions ---")
-  var configFilePath = './adscommoptions.cfg';
+  var configFilePath = '../ads-restful-srv-config/adscommoptions.cfg';
   // read configuration from file
   var config = props.read(configFilePath);
   logger.debug("host: " + config.host);

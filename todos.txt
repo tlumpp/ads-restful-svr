@@ -12,7 +12,6 @@ swagger base Path:
 
    basePath: /v1
 - subscription to variable change   
-- change path of config file ?
 - allow to modify port
 - return code handling in controller files (e.g. when non-exisiting variable is
   called then the return code is true)

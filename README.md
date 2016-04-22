@@ -18,7 +18,8 @@ To write a client application you can create easily a server stub using the
 ### Running the server (under construction)
 To run the server, follow these simple steps:
 
-configure ./adscommoptions.cfg like below
+configure ../ads-restful-srv-config/adscommoptions.cfg like below
+
 ```
 #==============================================================================
 # Configuration file ADS-RESTful Server
