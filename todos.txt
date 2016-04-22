@@ -5,14 +5,17 @@ Things to be done
   # array of all schemes that your API supports
 
    schemes:
-  
+
       - https
 swagger base Path:
 # will be prefixed to all paths
 
    basePath: /v1
+- subscription to variable change   
+- change path of config file ?
 - allow to modify port
-- return code handling in controller files
+- return code handling in controller files (e.g. when non-exisiting variable is
+  called then the return code is true)
 - tolerate no connection to PLC (currently server dies)
 - refine readme.md
 - adjust comments in swagger file
