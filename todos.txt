@@ -1,6 +1,16 @@
 Things to be done
 =================
 
+- swagger file Entry: (see uber example)
+  # array of all schemes that your API supports
+
+   schemes:
+  
+      - https
+swagger base Path:
+# will be prefixed to all paths
+
+   basePath: /v1
 - allow to modify port
 - return code handling in controller files
 - tolerate no connection to PLC (currently server dies)
