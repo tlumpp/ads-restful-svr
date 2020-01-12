@@ -39,6 +39,28 @@ function swagAdsCommConfig(req, res) {
 
 
 // ============================================================================
+// swagGetSpsVarValueHomeBridge
+// ============================================================================
+function swagGetSpsVarValueHomeBridge(req, res) {
+    logger.debug("--- swagGetSpsVarValueHomeBridge");
+
+    var workCommOptions = ads.readAdsCommOptions();
+    var workSpsVarName = req.swagger.params.spsVarName.value;
+    logger.debug("spsVarName: "+ workSpsVarName);
+    ads.getVarValue (workCommOptions, workSpsVarName, "ads.BOOL", function (err, value) {
+            res.setHeader('Content-Type', 'application/json');
+            if (value == true) {
+                value = 1;
+            }
+            if (value == false) {
+                value = 0;
+            }
+            res.end(JSON.stringify(value));
+            res.end(err, value);
+    });
+}
+
+// ============================================================================
 // swagGetSpsVarValue
 // ============================================================================
 function swagGetSpsVarValue(req, res) {
@@ -54,6 +76,7 @@ function swagGetSpsVarValue(req, res) {
             res.end(err, value);
     });
 }
+
 
 
 // ============================================================================
@@ -85,6 +108,7 @@ function swagPutSpsVarValue(req, res) {
 module.exports = {
   "swagAdsCommConfig": swagAdsCommConfig,
   "swagGetSpsVarValue": swagGetSpsVarValue,
+  "swagGetSpsVarValueHomeBridge": swagGetSpsVarValueHomeBridge,
   "swagPutSpsVarValue": swagPutSpsVarValue
 
 }
