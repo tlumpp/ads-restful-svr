@@ -118,6 +118,22 @@ function swagPutVarBoolToTrue(req, res) {
 }
 
 // ============================================================================
+// swagPutVarBoolToFalse
+// ============================================================================
+function swagPutVarBoolToFalse(req, res) {
+    logger.debug("--- swagPutVarBoolToFalse ---");
+
+    var workCommOptions = ads.readAdsCommOptions()
+    var workSpsVarName = req.swagger.params.spsVarName.value;
+    logger.debug("spsVarName: " + workSpsVarName + "set to false");
+    ads.putVarValue (workCommOptions, workSpsVarName, "ads.BOOL", false, function (err, value) {
+            res.end()
+    });
+    res.end();
+}
+
+
+// ============================================================================
 // exports
 // ============================================================================
 module.exports = {
@@ -125,6 +141,7 @@ module.exports = {
   "swagGetSpsVarValue": swagGetSpsVarValue,
   "swagGetSpsVarValueHomeBridge": swagGetSpsVarValueHomeBridge,
   "swagPutVarBoolToTrue": swagPutVarBoolToTrue,
+  "swagPutVarBoolToFalse": swagPutVarBoolToFalse,
   "swagPutSpsVarValue": swagPutSpsVarValue
 
 }
