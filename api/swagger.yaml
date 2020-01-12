@@ -71,6 +71,24 @@ paths:
           description: "Could not write variable"
       # x-swagger-router-controller: "Default"
     x-swagger-router-controller: "adsctrl"
+  /spsVarBoolToTrue/{spsVarName}:
+    put:
+      summary: "Set value of PLC variable {spsVarName} of type BOOL to true"
+      description: ""
+      operationId: "swagPutVarBoolToTrue"
+      parameters:
+      - name: "spsVarName"
+        in: "path"
+        description: "Variable name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful response"
+        400:
+          description: "Bad request - Could not read variable"
+      # x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "adsctrl"
   /spsVarBoolHomeBridge/{spsVarName}:
     get:
       summary: "Read value of PLC variable {spsVarName} of type BOOL"
