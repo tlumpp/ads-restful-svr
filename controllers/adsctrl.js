@@ -111,6 +111,7 @@ function swagPutSpsVarValue(req, res) {
             // res.setHeader('Content-Type', 'application/json');
             res.end()
             //res.end(err, value);
+            release();
     });
     res.end();
 }
