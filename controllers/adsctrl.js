@@ -26,6 +26,8 @@ var ads = require('./adscontroller');
 var log4js = require('log4js');
 var logger = log4js.getLogger();
 var util = require('util');
+var ReadWriteLock = require('rwlock');   
+var adsLock = new ReadWriteLock();
 
 
 // ============================================================================
@@ -33,8 +35,13 @@ var util = require('util');
 // ============================================================================
 function swagAdsCommConfig(req, res) {
     logger.debug("--- swagAdsCommConfig ---");
-    var workCommOptions = ads.readAdsCommOptions();
-    res.end();
+
+    adsLock.writeLock( function (release) {
+        logger.debug("got lock")
+        var workCommOptions = ads.readAdsCommOptions();
+        res.end();
+        release();
+    });
 }
 
 
@@ -44,19 +51,23 @@ function swagAdsCommConfig(req, res) {
 function swagGetSpsVarValueHomeBridge(req, res) {
     logger.debug("--- swagGetSpsVarValueHomeBridge");
 
-    var workCommOptions = ads.readAdsCommOptions();
-    var workSpsVarName = req.swagger.params.spsVarName.value;
-    logger.debug("spsVarName: "+ workSpsVarName);
-    ads.getVarValue (workCommOptions, workSpsVarName, "ads.BOOL", function (err, value) {
-            res.setHeader('Content-Type', 'application/json');
-            if (value == true) {
-                value = 1;
-            }
-            if (value == false) {
-                value = 0;
-            }
-            res.end(JSON.stringify(value));
-            res.end(err, value);
+    adsLock.writeLock( function (release) {
+        logger.debug("got lock")
+        var workCommOptions = ads.readAdsCommOptions();
+        var workSpsVarName = req.swagger.params.spsVarName.value;
+        logger.debug("spsVarName: "+ workSpsVarName);
+        ads.getVarValue (workCommOptions, workSpsVarName, "ads.BOOL", function (err, value) {
+                res.setHeader('Content-Type', 'application/json');
+                if (value == true) {
+                    value = 1;
+                }
+                if (value == false) {
+                    value = 0;
+                }
+                res.end(JSON.stringify(value));
+                // res.end(err, value);
+                release();
+        });
     });
 }
 
@@ -66,17 +77,20 @@ function swagGetSpsVarValueHomeBridge(req, res) {
 function swagGetSpsVarValue(req, res) {
     logger.debug("--- swagGetSpsVarValue");
 
-    var workCommOptions = ads.readAdsCommOptions();
-    var workSpsVarName = req.swagger.params.spsVarName.value;
-    logger.debug("spsVarName: "+ workSpsVarName);
-    ads.getVarValue (workCommOptions, workSpsVarName, "ads.BOOL", function (err, value) {
-            res.setHeader('Content-Type', 'application/json');
-            var retBody = { 'varValue': value};
-            res.end(JSON.stringify(retBody));
-            res.end(err, value);
+    adsLock.writeLock( function (release) {
+        logger.debug("got lock")
+        var workCommOptions = ads.readAdsCommOptions();
+        var workSpsVarName = req.swagger.params.spsVarName.value;
+        logger.debug("spsVarName: "+ workSpsVarName);
+        ads.getVarValue (workCommOptions, workSpsVarName, "ads.BOOL", function (err, value) {
+                res.setHeader('Content-Type', 'application/json');
+                var retBody = { 'varValue': value};
+                res.end(JSON.stringify(retBody));
+                // res.end(err, value);
+                release();
+        });
     });
 }
-
 
 
 // ============================================================================
