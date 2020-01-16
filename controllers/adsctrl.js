@@ -99,21 +99,23 @@ function swagGetSpsVarValue(req, res) {
 function swagPutSpsVarValue(req, res) {
     logger.debug("--- swagPutSpsVarValue ---");
 
-    var workCommOptions = ads.readAdsCommOptions()
-    var workSpsVarName = req.swagger.params.spsVarName.value;
-    logger.debug("spsVarName: " + workSpsVarName);
-    var workBooleanValue;
-    var workIntValue;
-    //console.log(util.inspect(req.swagger.params.spsVarValue, {showHidden: false, depth: null}));
-    workBooleanValue = req.swagger.params.spsVarValue.value;
-    logger.debug("workBooleanValue.varValue: " + workBooleanValue.varValue);
-    ads.putVarValue (workCommOptions, workSpsVarName, "ads.BOOL", workBooleanValue.varValue, function (err, value) {
-            // res.setHeader('Content-Type', 'application/json');
-            res.end()
-            //res.end(err, value);
-            release();
+    adsLock.writeLock( function (release) {
+        var workCommOptions = ads.readAdsCommOptions()
+        var workSpsVarName = req.swagger.params.spsVarName.value;
+        logger.debug("spsVarName: " + workSpsVarName);
+        var workBooleanValue;
+        var workIntValue;
+        //console.log(util.inspect(req.swagger.params.spsVarValue, {showHidden: false, depth: null}));
+        workBooleanValue = req.swagger.params.spsVarValue.value;
+        logger.debug("workBooleanValue.varValue: " + workBooleanValue.varValue);
+        ads.putVarValue (workCommOptions, workSpsVarName, "ads.BOOL", workBooleanValue.varValue, function (err, value) {
+                // res.setHeader('Content-Type', 'application/json');
+                res.end()
+                //res.end(err, value);
+                release();
+        });
+        res.end();
     });
-    res.end();
 }
 
 
@@ -123,13 +125,16 @@ function swagPutSpsVarValue(req, res) {
 function swagPutVarBoolToTrue(req, res) {
     logger.debug("--- swagPutVarBoolToTrue ---");
 
-    var workCommOptions = ads.readAdsCommOptions()
-    var workSpsVarName = req.swagger.params.spsVarName.value;
-    logger.debug("spsVarName: " + workSpsVarName + "set to true");
-    ads.putVarValue (workCommOptions, workSpsVarName, "ads.BOOL", true, function (err, value) {
-            res.end()
-    });
-    res.end();
+    adsLock.writeLock( function (release) {
+        var workCommOptions = ads.readAdsCommOptions()
+        var workSpsVarName = req.swagger.params.spsVarName.value;
+        logger.debug("spsVarName: " + workSpsVarName + "set to true");
+        ads.putVarValue (workCommOptions, workSpsVarName, "ads.BOOL", true, function (err, value) {
+                res.end()
+                release();
+        });
+        res.end();
+    });    
 }
 
 // ============================================================================
@@ -138,13 +143,16 @@ function swagPutVarBoolToTrue(req, res) {
 function swagPutVarBoolToFalse(req, res) {
     logger.debug("--- swagPutVarBoolToFalse ---");
 
-    var workCommOptions = ads.readAdsCommOptions()
-    var workSpsVarName = req.swagger.params.spsVarName.value;
-    logger.debug("spsVarName: " + workSpsVarName + "set to false");
-    ads.putVarValue (workCommOptions, workSpsVarName, "ads.BOOL", false, function (err, value) {
-            res.end()
+    adsLock.writeLock( function (release) {
+        var workCommOptions = ads.readAdsCommOptions()
+        var workSpsVarName = req.swagger.params.spsVarName.value;
+        logger.debug("spsVarName: " + workSpsVarName + "set to false");
+        ads.putVarValue (workCommOptions, workSpsVarName, "ads.BOOL", false, function (err, value) {
+                res.end()
+                release();
+        });
+        res.end();
     });
-    res.end();
 }
 
 
