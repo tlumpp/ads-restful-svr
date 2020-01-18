@@ -127,6 +127,26 @@ paths:
           description: "Bad request - Could not read variable"
       # x-swagger-router-controller: "Default"
     x-swagger-router-controller: "adsctrl"
+  /spsVarBoolHomeBridgeInverse/{spsVarName}:
+    get:
+      summary: "Read value of PLC variable {spsVarName} of type BOOL an invert value"
+      description: ""
+      operationId: "swagGetSpsVarValueHomeBridgeInverse"
+      parameters:
+      - name: "spsVarName"
+        in: "path"
+        description: "Variable name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/boolVal"
+        400:
+          description: "Bad request - Could not read variable"
+      # x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "adsctrl"
 definitions:
   boolVal:
     type: "object"

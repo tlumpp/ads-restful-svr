@@ -72,6 +72,34 @@ function swagGetSpsVarValueHomeBridge(req, res) {
 }
 
 // ============================================================================
+// swagGetSpsVarValueHomeBridgeInverse
+// ============================================================================
+function swagGetSpsVarValueHomeBridgeInverse(req, res) {
+    logger.debug("--- swagGetSpsVarValueHomeBridge");
+
+    adsLock.writeLock( function (release) {
+        logger.debug("got lock")
+        var workCommOptions = ads.readAdsCommOptions();
+        var workSpsVarName = req.swagger.params.spsVarName.value;
+        logger.debug("spsVarName: "+ workSpsVarName);
+        ads.getVarValue (workCommOptions, workSpsVarName, "ads.BOOL", function (err, value) {
+                res.setHeader('Content-Type', 'application/json');
+                if (value == false) {
+                    value = 1;
+                }
+                if (value == true) {
+                    value = 0;
+                }
+                res.end(JSON.stringify(value));
+                // res.end(err, value);
+                release();
+        });
+    });
+}
+
+
+
+// ============================================================================
 // swagGetSpsVarValue
 // ============================================================================
 function swagGetSpsVarValue(req, res) {
