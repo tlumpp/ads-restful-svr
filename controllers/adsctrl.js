@@ -75,7 +75,7 @@ function swagGetSpsVarValueHomeBridge(req, res) {
 // swagGetSpsVarValueHomeBridgeInverse
 // ============================================================================
 function swagGetSpsVarValueHomeBridgeInverse(req, res) {
-    logger.debug("--- swagGetSpsVarValueHomeBridge");
+    logger.debug("--- swagGetSpsVarValueHomeBridgeInverse");
 
     adsLock.writeLock( function (release) {
         logger.debug("got lock")
@@ -191,6 +191,7 @@ module.exports = {
   "swagAdsCommConfig": swagAdsCommConfig,
   "swagGetSpsVarValue": swagGetSpsVarValue,
   "swagGetSpsVarValueHomeBridge": swagGetSpsVarValueHomeBridge,
+  "swagGetSpsVarValueHomeBridgeInverse": swagGetSpsVarValueHomeBridgeInverse,
   "swagPutVarBoolToTrue": swagPutVarBoolToTrue,
   "swagPutVarBoolToFalse": swagPutVarBoolToFalse,
   "swagPutSpsVarValue": swagPutSpsVarValue
