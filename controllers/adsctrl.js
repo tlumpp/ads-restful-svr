@@ -46,6 +46,24 @@ function swagAdsCommConfig(req, res) {
 
 
 // ============================================================================
+// swagAdsCommConfig
+// ============================================================================
+function swagGetVarNames(req, res) {
+    logger.debug("--- swagGetVarNames ---");
+
+    adsLock.writeLock( function (release) {
+        logger.debug("got lock")
+        var workCommOptions = ads.readAdsCommOptions();
+        ads.getVarNames(workCommOptions, function (err, symbols) {
+            logger.debug(symbols)
+            // res.end(JSON.stringify(symbols));
+            res.end();
+            release();
+        });
+    });
+}
+
+// ============================================================================
 // swagGetSpsVarValueHomeBridge
 // ============================================================================
 function swagGetSpsVarValueHomeBridge(req, res) {
@@ -189,6 +207,7 @@ function swagPutVarBoolToFalse(req, res) {
 // ============================================================================
 module.exports = {
   "swagAdsCommConfig": swagAdsCommConfig,
+  "swagGetVarNames": swagGetVarNames,
   "swagGetSpsVarValue": swagGetSpsVarValue,
   "swagGetSpsVarValueHomeBridge": swagGetSpsVarValueHomeBridge,
   "swagGetSpsVarValueHomeBridgeInverse": swagGetSpsVarValueHomeBridgeInverse,

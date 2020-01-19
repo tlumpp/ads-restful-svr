@@ -29,6 +29,19 @@ paths:
           description: "Not found - Could not find configuration file"
       # x-swagger-router-controller: "Default"
     x-swagger-router-controller: "adsctrl"
+  /spsGetVarNames:
+    get:
+      summary: "Get names of variables (log output)"
+      description: ""
+      operationId: "swagGetVarNames"
+      parameters: []
+      responses:
+        200:
+          description: "Successful response"
+        400:
+          description: "Bad request - Could not read variable names"
+      # x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "adsctrl"
   /spsVarBool/{spsVarName}:
     get:
       summary: "Read value of PLC variable {spsVarName} of type BOOL"

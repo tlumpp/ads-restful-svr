@@ -84,6 +84,7 @@ function getVarNames (options, callback) {
         this.getSymbols(function(err,symbols) {
         // Question ????? wie macht man hier richtiges error handling ???
             console.log("--- callback: getSymbols ---");
+            console.log(symbols)
             if (err)
               logger.debug("error");
             return callback (null, symbols)
@@ -282,6 +283,7 @@ function getVarValue (options, varName, adsType, callback) {
 // ============================================================================
 module.exports = {
   "readAdsCommOptions": readAdsCommOptions,
+  "getVarNames": getVarNames,
   "getVarValue": getVarValue,
   "putVarValue": putVarValue
 }
