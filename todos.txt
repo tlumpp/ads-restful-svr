@@ -1,6 +1,12 @@
 Things to be done
 =================
 
+
+- swagger file anpassen fuer response homebridge (true false als integer)
+- remove inverse ?
+- tolerate wrong var name when writing
+- netzverbindung zu SPS wird unterbrochen 
+- automatic restart after failure
 - swagger file Entry: (see uber example)
   # array of all schemes that your API supports
 
