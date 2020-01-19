@@ -22,7 +22,7 @@
 
 'use strict'
 
-var ads = require('ads'),
+var ads = require('node-ads'),
     fs = require('fs'),
     log4js = require('log4js'),
     logger = log4js.getLogger(),
