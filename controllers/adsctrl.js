@@ -56,8 +56,17 @@ function swagGetVarNames(req, res) {
         var workCommOptions = ads.readAdsCommOptions();
         ads.getVarNames(workCommOptions, function (err, symbols) {
             logger.debug(symbols)
-            // res.end(JSON.stringify(symbols));
-            res.end();
+            // symbols is an array of json objects
+            // var shortListSymbols
+            // var j = 0;
+            // for (var i in symbols) {
+            //    if (symbols[i].name.includes("MAIN")) {
+            //        shortListSymbols[j].push(symbols[i])
+            //        j++
+            //    }
+            // }
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(symbols));
             release();
         });
     });

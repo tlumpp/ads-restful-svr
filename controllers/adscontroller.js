@@ -86,9 +86,9 @@ function getVarNames (options, callback) {
             console.log("--- callback: getSymbols ---");
             if (err)
               logger.debug("error");
-              console.log(JSON.stringify(symbols, null, 2))
-            return callback (null, symbols)
+            console.log(JSON.stringify(symbols, null, 2))
             this.end();
+            return callback (null, symbols)
         });
     });
 }
