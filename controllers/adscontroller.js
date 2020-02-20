@@ -79,9 +79,11 @@ function readAdsCommOptions() {
 // output: callback is a callback function with (err, symbols)
 // ============================================================================
 function getVarNames (options, callback) {
-    var client = ads.connect(options, function() {
+    var client = ads.connect(options, function(err) {
+        if (err)
+            logger.debug("error - connect");
         logger.debug("--- callback: ads.connect ---");
-        this.getSymbols(function(err, symbols) {
+        this.getSymbols(function(err, symbols, false) {
         // Question ????? wie macht man hier richtiges error handling ???
             console.log("--- callback: getSymbols ---");
             if (err)
@@ -274,6 +276,9 @@ function getVarValue (options, varName, adsType, callback) {
             callback (null, handle.value);
             // return
         });
+    });
+    client.on('error', function(error) {
+        console.log(error);
     });
 }
 
